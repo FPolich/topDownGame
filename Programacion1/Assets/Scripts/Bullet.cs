@@ -7,8 +7,6 @@ public class Bullet : MonoBehaviour
     public float speed = 10;
     public float lifeTime = 4.0F;
     public int bulletDamage;
-   
-
     void Start()
     {
         bulletDamage = 10;
@@ -38,7 +36,6 @@ public class Bullet : MonoBehaviour
             //para que vean como se maneja.
             collision.gameObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
 
-
         }
         if (collision.gameObject.layer == 11)
         {
@@ -48,7 +45,6 @@ public class Bullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<PatrolEnemy>().GetDamage(bulletDamage);
         }
-
         Destroy(this.gameObject);            
     }
 }

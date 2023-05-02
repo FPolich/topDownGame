@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     public int speed;
     public int llaves;
     public float life;
-
     public Transform BulletSpawner;
     public GameObject bulletPrefab;
 
@@ -22,11 +21,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         fireTimer = 0;
-    
-    rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Shoot();
@@ -66,12 +63,8 @@ public class Player : MonoBehaviour
 
          }*/
          //////////////////////////////////////////////////////////////////
-         
-        
-
         rb.MovePosition(transform.position + new Vector3(movement.x, movement.y,0) * speed * Time.fixedDeltaTime);
-
-       rb.MoveRotation(rb.rotation + Input.GetAxisRaw("Horizontal") * -speedRotation * Time.fixedDeltaTime);
+        rb.MoveRotation(rb.rotation + Input.GetAxisRaw("Horizontal") * -speedRotation * Time.fixedDeltaTime);
     }
 
 
@@ -89,9 +82,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Mouse0) && fireTimer >= FireCD)
         {
-
             Instantiate(bulletPrefab, BulletSpawner.position, BulletSpawner.rotation);
-
             fireTimer = 0;
         }
     }
@@ -99,7 +90,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amount) 
     {
         life -= amount;
-        Debug.Log("vida actual :" + life);
+        print("vida actual :" + life);
     }
 /*
     private void OnCollisionExit2D(Collision2D collision)
@@ -110,5 +101,4 @@ public class Player : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
     }*/
-
 }

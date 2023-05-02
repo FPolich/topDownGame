@@ -16,7 +16,6 @@ public class OntriggerAction : MonoBehaviour
     }
     public void Update()
     {
-
      /*   if (onTrigger)
         {
           // Debug.Log("estoy en trigger");
@@ -33,7 +32,7 @@ public class OntriggerAction : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            Debug.Log("estoy en trigger");
+            print("estoy en trigger");
            // onTrigger = true;
             if (Input.GetKey(KeyCode.Space))
             {
@@ -49,9 +48,8 @@ public class OntriggerAction : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            Debug.Log("sali del trigger");
+            print("sali del trigger");
             onTrigger= false;
-
             door.transform.position = posInicial;
         }
     }

@@ -9,31 +9,22 @@ public class PatrolEnemy : MonoBehaviour
     //
     //creamos variable direction. y movemos hacia el target.
     //
-
     public int life;
-
     public Transform target;
     public float speed;
     Rigidbody2D rb;
     Vector3 direction;
 
-
     //sistema de patrullaje con Waypoints.//
-
     public Transform[] wayPoints;
     //pra sabr por que index de wp vamos.
     int waypointINdex = 0;
     //para hacer un back
     int directionArray = 1;
-
     public float offset = 0.5F;
-
 
     //gizmos
     public int distanceRange = 12;
-
-
-
 
     void Start()
     {
@@ -46,8 +37,6 @@ public class PatrolEnemy : MonoBehaviour
     {
         // vamos a sacar la direccion a la que tiene que ir como dijimos antes es B-A (posFinal menos pos inicial ). y la normalizamos.
         direction = (target.position - transform.position).normalized;
-
-
         if (Vector3.Distance(transform.position, target.position) < distanceRange)
         {
             //movimiento por transform persiguiendo al jugador/target.
@@ -57,15 +46,11 @@ public class PatrolEnemy : MonoBehaviour
         else
         {
             MoveByWaypoints();
-
         }
-
-
     }
 
     private void FixedUpdate()
     {
-
         if (Vector3.Distance(transform.position, target.position) < distanceRange * 0.5f) return;
         if (!(Vector3.Distance(transform.position, target.position) < distanceRange)) return;
 
@@ -75,7 +60,6 @@ public class PatrolEnemy : MonoBehaviour
         Vector3 vectorToTarget = target.position - transform.position;
         float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
     }
 
 
@@ -97,8 +81,7 @@ public class PatrolEnemy : MonoBehaviour
             //por que le sumamos la direction array, ( si en este momento vale -1) le va a restar 1. y pasaria al waypoint anterior.
             //ya que nos va a indicar a donde es la direccion el directionArray.
             waypointINdex += directionArray;
-
-
+            /*
             //para hacer que vuelva por el mismo camino simulano un "pathfinding".
             //chequeamos no pasarnos de los limites.
             //en este caso es para que cuando llega al final del array empiece a volver para atras.
@@ -118,7 +101,7 @@ public class PatrolEnemy : MonoBehaviour
             //     waypointINdex = 0;
             //     directionArray = 1;
             // }
-
+            */
             if (waypointINdex >= wayPoints.Length)
             {
                 waypointINdex = 0;
@@ -131,7 +114,6 @@ public class PatrolEnemy : MonoBehaviour
     {
         // Gizmos.color = Color.red;
         Gizmos.color = new Vector4(1, 0, 1, 0.5f);
-
         Gizmos.DrawWireSphere(transform.position, distanceRange);
     }
 
@@ -143,6 +125,4 @@ public class PatrolEnemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-
 }

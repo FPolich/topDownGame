@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class StaticEnemy : MonoBehaviour
 {
-
     //creamos el enemigo.
     //hacemos que mire al personaje
     //detectamos rango con trigger
     //detectamos rango con distancia minima
     //creamos bullet enemy
     //disparamos cuando este en rango al target.
-
     public int life;
     public Transform target;
-
     public bool canRotate;
-
     public float minDistance;
-
-
     public GameObject EnemyBullet;
     public Transform bulletSpawn;
-
     public float fireRate = 0.5f;
-
     public float fireTimer;
 
     void Start()
@@ -41,12 +33,9 @@ public class StaticEnemy : MonoBehaviour
         if (fireTimer < fireRate)
         {
             fireTimer += Time.deltaTime;
-
         }       
 
-
         //calculamos la distancia.
-
        float actualDistance = Vector3.Distance(transform.position, target.position);
 
         if (actualDistance <= minDistance)
@@ -58,11 +47,9 @@ public class StaticEnemy : MonoBehaviour
             canRotate = false;
         }
 
-
         if (canRotate)
         {
            LookTarget();
-
             if (fireTimer>=fireRate)
             {
                 Shoot();
@@ -92,7 +79,6 @@ public class StaticEnemy : MonoBehaviour
         //y en 2d el "Z" es el eje X para rotacion.
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
     }
 
     //esta opcion es si lo queremos hacer por trigger que Detecte el rango.
@@ -117,11 +103,8 @@ public class StaticEnemy : MonoBehaviour
     {
        // Gizmos.color = Color.red;
         Gizmos.color = new Vector4(1,0,1,0.5f);
-
         Gizmos.DrawWireSphere(transform.position, minDistance);
     }
-
-
 
     void Shoot() 
     {

@@ -10,35 +10,29 @@ public class puerta : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     //duracion del fade.
     public float fadeOutDuration = 1.0f;
-
-  //  public GameObject potion;
-
+    //  public GameObject potion;
     void Start()
     {
-
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 7)
         {
             var target = collision.gameObject.GetComponent<Player>();
-          if (target != null) 
-          { 
-            if (target.llaves > 0)
-            {
-                StartCoroutine(FadeOutColor()); // comienza la rotación de la puerta
-                collision.gameObject.GetComponent<Player>().llaves = 0;
-
-                 //  Instantiate(potion,transform.position,transform.rotation);
-
-                //en caso que quiera que al collisionar la puerta se vuelva trigger el boxcollider. y se pueda traspasar.
-                //buscamos el componente del boxcollider y llamamos a su variable "isTrigger".
-                // this.gameObject.GetComponent<BoxCollider2D>().isTrigger= true;
+            if (target != null) 
+            { 
+                if (target.llaves > 0)
+                {
+                    StartCoroutine(FadeOutColor()); // comienza la rotación de la puerta
+                    collision.gameObject.GetComponent<Player>().llaves = 0;
+                    //  Instantiate(potion,transform.position,transform.rotation);
+                    //en caso que quiera que al collisionar la puerta se vuelva trigger el boxcollider. y se pueda traspasar.
+                    //buscamos el componente del boxcollider y llamamos a su variable "isTrigger".
+                    // this.gameObject.GetComponent<BoxCollider2D>().isTrigger= true;
+                }
             }
-          }
         }
     }
 
@@ -65,41 +59,38 @@ public class puerta : MonoBehaviour
 
          */
         #endregion
-
-
         //fadeOut de color a 0 su alpha.
-
         // Se define la transparencia inicial del objeto
         Color initialColor = spriteRenderer.color;
 
-    // Se crea un nuevo color que tiene los mismos valores de rojo, verde y azul que el color inicial, pero con una transparencia de 0.0f
-    Color fadedColor = new Color(initialColor.r, initialColor.g, initialColor.b, 0.0f);
+        // Se crea un nuevo color que tiene los mismos valores de rojo, verde y azul que el color inicial, pero con una transparencia de 0.0f
+        Color fadedColor = new Color(initialColor.r, initialColor.g, initialColor.b, 0.0f);
     
-    // Se define el tiempo total que tomará desvanecer el objeto (en segundos)
-    float fadeOutDuration = 1.0f;
+        // Se define el tiempo total que tomará desvanecer el objeto (en segundos)
+        float fadeOutDuration = 1.0f;
     
-    // Se define el tiempo transcurrido desde el inicio del desvanecimiento
-    float elapsedTime = 0.0f;
+        // Se define el tiempo transcurrido desde el inicio del desvanecimiento
+        float elapsedTime = 0.0f;
     
-    // Se utiliza un bucle while para cambiar gradualmente la transparencia del objeto hasta 0.0f
-       while (elapsedTime < fadeOutDuration)
-       {
-           // Se calcula el progreso de la transición como un valor entre 0.0f y 1.0f, en función del tiempo transcurrido y la duración total del desvanecimiento
-           float t = elapsedTime / fadeOutDuration;
+        // Se utiliza un bucle while para cambiar gradualmente la transparencia del objeto hasta 0.0f
+        while (elapsedTime < fadeOutDuration)
+        {
+        // Se calcula el progreso de la transición como un valor entre 0.0f y 1.0f, en función del tiempo transcurrido y la duración total del desvanecimiento
+        float t = elapsedTime / fadeOutDuration;
        
-           // Se utiliza la función Color.Lerp para interpolar entre el color inicial y el color desvanecido en función del progreso de la transición
-           spriteRenderer.color = Color.Lerp(initialColor, fadedColor, t);
+        // Se utiliza la función Color.Lerp para interpolar entre el color inicial y el color desvanecido en función del progreso de la transición
+        spriteRenderer.color = Color.Lerp(initialColor, fadedColor, t);
        
-           // Se actualiza el tiempo transcurrido y se espera al siguiente frame
-           elapsedTime += Time.deltaTime;
-           yield return null;
-       }
+        // Se actualiza el tiempo transcurrido y se espera al siguiente frame
+        elapsedTime += Time.deltaTime;
+        yield return null;
+        }
        
-      // Una vez que se ha alcanzado la transparencia deseada, se establece el color del objeto en el color desvanecido para asegurarse de que su transparencia sea exactamente 0.0f
-      spriteRenderer.color = fadedColor;
+        // Una vez que se ha alcanzado la transparencia deseada, se establece el color del objeto en el color desvanecido para asegurarse de que su transparencia sea exactamente 0.0f
+        spriteRenderer.color = fadedColor;
     
-       // Se desactiva el objeto
-      gameObject.SetActive(false);
+        // Se desactiva el objeto
+        gameObject.SetActive(false);
     }
 }
     
