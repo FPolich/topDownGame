@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletEnemy : MonoBehaviour
 {
     public int speed = 5;
-    public int lifeTime = 3
+    public int lifeTime = 3;
     public int damage= 5;
 
     void Start()
